@@ -229,7 +229,7 @@ export const checkFileExtension = (fileName: string) =>
   fileName;
 
 /**
- * @author Sanchit Dang
+ * @author Navit Choudhary
  *
  * @param {Object} obj Object to clean.
  * @param {Function} callback callback function which returns cleaned object.

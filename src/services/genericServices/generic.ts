@@ -5,7 +5,7 @@ export default class GenericDBService {
 
     /**
      * @private
-     * @author Sanchit Dang
+     * @author Navit Choudhary
      * @description Validate if models exists
      * @param {String} modelName name of the model 
      */

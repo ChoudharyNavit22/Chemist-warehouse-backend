@@ -4,7 +4,8 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js -e ts  --exec \"yarn run compile\"",
-    "compile": "tsc && node ./dist/index.js"
+    "compile": "tsc && node ./dist/index.js",
+    "build": "tsc"
   },
   "repository": "git@github.com:ChoudharyNavit22/Chemist-warehouse-backend.git",
   "author": "Navit Choudhary",
