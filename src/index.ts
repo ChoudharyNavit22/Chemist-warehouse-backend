@@ -1,6 +1,8 @@
 import { Server, Request, ResponseToolkit } from "@hapi/hapi";
 import  HapiSwaggerPlugin  from "./plugins/swagger";
 import * as Handlebars from "handlebars";
+import Routes from "./routes";
+import mongoInstance from "./db_connect";
 import 'dotenv/config';
 
 const init = async () => {
@@ -9,6 +11,7 @@ const init = async () => {
         host: '0.0.0.0'
     });
     try{
+        
         await server.register(HapiSwaggerPlugin);
         server.views({
             engines: {
@@ -24,6 +27,8 @@ const init = async () => {
                 return h.view("welcome");
             }
         });
+        server.route(Routes);
+        await mongoInstance.connectMongoDB();
     }
     catch(err) {
         console.debug("Swagger error: ",err)
