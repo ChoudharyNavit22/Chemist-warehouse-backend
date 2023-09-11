@@ -1,0 +1,45 @@
+name: 'PR Title Validation'
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
+
+jobs:
+  pr-validation:
+    runs-on: ubuntu-20.04
+    steps:
+      # -
+      #   name: Dump context
+      #   uses: crazy-max/ghaction-dump-context@v2
+
+      - uses: actions/checkout@v3
+      - uses: deepakputhraya/action-pr-title@master
+        name: JIRA Ticket title validation
+        with:
+          regex: '\bCWB-\d+\b' # Regex the title should match.
+          # allowed_prefixes: 'feat,fix,ci,docs,test,chore' # title should start with the given prefix
+          # disallowed_prefixes: 'feat/,hotfix' # title should not start with the given prefix
+          prefix_case_sensitive: true # title prefix are case insensitive
+          min_length: 20
+          max_length: 80
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Conventional title validation
+        uses: aslafy-z/conventional-pr-title-action@v3
+        with:
+          success-state: Title follows the specification.
+          failure-state: Title does not follow the specification. Make sure PR title follow contentional commit format
+          context-name: conventional-pr-title
+          preset: conventional-changelog-angular@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: output-url
+        run: echo ${{steps.open-pr.outputs.pr_url}}
+      - name: output-number
+        run: echo ${{steps.open-pr.outputs.pr_number}}
+      - name: output-has-changed-files
+        run: echo ${{steps.open-pr.outputs.has_changed_files}}
