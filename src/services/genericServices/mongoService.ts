@@ -94,6 +94,24 @@ export default class GenericMongoService extends GenericDBService {
 
     /**
      * @author Navit Choudhary
+     * @description Retrive records
+     * @param {Object} criteria 
+     * @param {Object} projection 
+     * @param {Object} options 
+     * @param {Function} callback 
+     */
+    async getSingleRecord(criteria: GenericObject, projection: GenericObject, options: GenericObject) {
+        try {
+            options.lean = true;
+            const result = await this.model.findOne(criteria, projection, options);
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    /**
+     * @author Navit Choudhary
      * @description Retrive records while populating them
      * @param {Object} criteria 
      * @param {Object} projection 

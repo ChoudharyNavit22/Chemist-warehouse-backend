@@ -1,6 +1,7 @@
+import { ServerRoute } from '@hapi/hapi';
 import * as Joi from "joi";
 import CONFIG from "../../config"
-import { sendError, sendSuccess, failActionFunction } from "../../utils";
+import { sendSuccess, failActionFunction } from "../../utils";
 
 const demoApi = {
     method: "POST",
@@ -9,7 +10,7 @@ const demoApi = {
       description: "demo api",
       tags: ["api", "demo"],
       handler: function (request, h) {
-        var payloadData = request.payload;
+        let payloadData = request.payload;
         return new Promise((resolve, reject)=>{
           resolve(sendSuccess(CONFIG.APP_CONSTANTS.STATUS_MSG.SUCCESS.DEFAULT,payloadData.message));
         })
@@ -28,5 +29,5 @@ const demoApi = {
     }
   };
 
-const DemoBaseRoute = [demoApi];
+const DemoBaseRoute: ServerRoute[]= [demoApi];
 export default DemoBaseRoute;
