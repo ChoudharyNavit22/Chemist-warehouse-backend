@@ -7,8 +7,14 @@ import 'dotenv/config';
 
 const init = async () => {
     const server: Server = new Server({
+        app: {
+            name: process.env.APP_NAME || "default"
+          },
         port: process.env.PORT || 8000,
-        host: '0.0.0.0'
+        host: '0.0.0.0',
+        routes:{
+            cors: true
+        }
     });
     try{
         
