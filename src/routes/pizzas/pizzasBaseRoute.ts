@@ -44,9 +44,9 @@ const createPizzas = {
 
   const getPizzas = {
     method: "GET",
-    path: "/api/user/pizzas/{shopId}",
+    path: "/api/user/{shopId}/pizzas",
     options: {
-      description: "get Toppings",
+      description: "get Pizzas",
       tags: ["api", "admin"],
       handler: function (request, h) {
         return new Promise((resolve, reject)=>{
@@ -73,8 +73,40 @@ const createPizzas = {
     }
   };
 
+  const getPizza = {
+    method: "GET",
+    path: "/api/user/pizzas/{pizzaId}",
+    options: {
+      description: "get Pizza",
+      tags: ["api", "admin"],
+      handler: function (request, h) {
+        return new Promise((resolve, reject)=>{
+          Controller.PizzaBaseController.getPizza(request.params).then( result => {
+            resolve(sendSuccess(CONFIG.APP_CONSTANTS.STATUS_MSG.SUCCESS.DEFAULT,result))
+          }).catch( err => {
+            reject(sendError(err))
+          })
+        })
+      },
+      validate: {
+        params: Joi.object({
+          pizzaId: Joi.string().required(),
+          })
+            .required()
+            .label("User: (Get) Pizza Id (Params)"),
+        failAction: failActionFunction
+      },
+      plugins: {
+        "hapi-swagger": {
+          responseMessages: CONFIG.APP_CONSTANTS.swaggerDefaultResponseMessages
+        }
+      }
+    }
+  };
+
 const PizzasBaseRoute: ServerRoute[]= [
     createPizzas,
-    getPizzas
+    getPizzas,
+    getPizza
 ];
 export default PizzasBaseRoute;

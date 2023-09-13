@@ -2,7 +2,8 @@ import {
   SwaaggerResponseMessage,
   StatusMessages,
   FrozenResponseMessage,
-  TimeUnits
+  TimeUnits,
+  DatabaseConstants
 } from "../interfaces";
 
 const swaggerDefaultResponseMessages: Array<SwaaggerResponseMessage>  = [
@@ -79,6 +80,13 @@ const swaggerDefaultResponseMessages: Array<SwaaggerResponseMessage>  = [
     WEEKS: "weeks",
     DAYS: "days"
   };
+
+  const DATABASE: DatabaseConstants = {
+    ORDER_STATUS: {
+      PENDING: "PENDING",
+      COMPLETED: "COMPLETED"
+    }
+  };
   
   
   export default {
@@ -86,5 +94,6 @@ const swaggerDefaultResponseMessages: Array<SwaaggerResponseMessage>  = [
     STATUS_MSG,
     CUSTOM_ERROR_404,
     CUSTOM_ERROR,
-    TIME_UNITS
+    TIME_UNITS,
+    DATABASE
   } as const;

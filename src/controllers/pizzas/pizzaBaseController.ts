@@ -24,7 +24,24 @@ class PizzaBaseController extends GenericController {
         payloadData: GenericObject
         ) => {
         try {
-            const pizzaData = await this.services.PizzaService.getRecord({shopId: payloadData.shopId},{},{});
+            let pizzaData: any = await this.services.PizzaService.getRecord({shopId: payloadData.shopId},{},{});
+            pizzaData.forEach((item: any) => {
+                item.ingredients = item.ingredients.join()
+            })
+            return pizzaData;
+        }
+        catch(err){
+            throw err.message;
+        }
+    }
+    getPizza = async(
+        payloadData: GenericObject
+        ) => {
+        try {
+            let pizzaData: any = await this.services.PizzaService.getRecord({_id: payloadData.pizzaId},{},{});
+            pizzaData.forEach((item: any) => {
+                item.ingredients = item.ingredients.join()
+            })
             return pizzaData;
         }
         catch(err){

@@ -35,3 +35,12 @@ export interface SwaaggerResponseMessage {
     readonly code: number;
     readonly message: string;
 }
+
+export interface OrderStatus {
+    readonly PENDING: string;
+    readonly COMPLETED: string;
+}
+
+export interface DatabaseConstants {
+    readonly ORDER_STATUS: OrderStatus;
+}

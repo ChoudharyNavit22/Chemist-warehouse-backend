@@ -118,7 +118,7 @@ export default class GenericMongoService extends GenericDBService {
      * @param {Object|string} populate 
      * @param {Function} callback 
      */
-    async getPopulatedRecords(criteria: GenericObject, projection: GenericObject, populate: string | string[]) {
+    async getPopulatedRecords(criteria: GenericObject, projection: GenericObject, populate: string | string[] | any) {
         try {
             const result = await this.model.find(criteria).select(projection).populate(populate);
             return result;
