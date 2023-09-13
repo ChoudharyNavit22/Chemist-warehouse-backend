@@ -257,3 +257,7 @@ export const throwIfNotRunningPnpm=()=>{
     throw('Please use pnpm to run this project');
   }
 }
+
+export const sumNumbers=(a,b) => {
+  return a + b;
+}
